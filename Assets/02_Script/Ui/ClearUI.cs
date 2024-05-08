@@ -43,6 +43,7 @@ public class ClearUI : MonoBehaviour
 
     public void NextStage()
     {
+        StageManager.Instance.NextStage();
         Player.Instance.isStart = false;
         StartCoroutine(ClearUIUp());
     }

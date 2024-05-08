@@ -27,7 +27,7 @@ public class Player : MonoBehaviour
 
         rb = GetComponent<Rigidbody2D>();
 
-        OnInfLimitChange();
+        ChangeInkLimit();
     }
 
     private void Update()
@@ -48,6 +48,11 @@ public class Player : MonoBehaviour
             inkLimit = inkLimitOrigin;
             Portal.count = 1;
         }
+
+        if (isComplete)
+        {
+            StageManager.Instance.SetLeastInk();
+        }
     }   
 
     private void ResetPlayer()
@@ -58,7 +63,7 @@ public class Player : MonoBehaviour
         isReset = false;
     }
 
-    private void OnInfLimitChange()
+    private void ChangeInkLimit()
     {
         inkLimit = inkLimitOrigin;
         inkLimit = Mathf.Clamp(inkLimit, 0, inkLimitOrigin);
