@@ -10,9 +10,8 @@ public class StageManager : MonoBehaviour
 
     public GameObject[] maps;
     private GameObject currentMap;
-    private GameObject prevMap;
 
-    public static float[] inkLimits = { 10, 7.5f, 5f, 12.5f, 10 };
+    public static float[] inkLimits = { 10f, 6f, 4f, 10f, 10f };
     public float[] leastInk = new float[inkLimits.Length];
 
     private int currentLevel = 0;

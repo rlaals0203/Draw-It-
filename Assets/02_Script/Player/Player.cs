@@ -65,6 +65,7 @@ public class Player : MonoBehaviour
 
     private void ChangeInkLimit()
     {
+        inkLimitOrigin = StageManager.Instance.GetInkLimit();
         inkLimit = inkLimitOrigin;
         inkLimit = Mathf.Clamp(inkLimit, 0, inkLimitOrigin);
     }
