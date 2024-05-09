@@ -43,8 +43,6 @@ public class ClearUI : MonoBehaviour
 
     public void NextStage()
     {
-        StageManager.Instance.NextStage();
-        Player.Instance.isStart = false;
         StartCoroutine(ClearUIUp());
     }
 
@@ -74,5 +72,8 @@ public class ClearUI : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
 
         background.gameObject.SetActive(false);
+
+        StageManager.Instance.NextStage();
+        Player.Instance.isStart = false;
     }
 }
