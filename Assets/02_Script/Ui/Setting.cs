@@ -35,6 +35,7 @@ public class Setting : MonoBehaviour
 
     public void OnExitButton()
     {
+        Destroy(StageManager.Instance.currentMap);
         SceneManager.LoadScene("Menu");
     }
 }

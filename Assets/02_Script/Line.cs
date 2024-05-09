@@ -43,7 +43,10 @@ public class Line : MonoBehaviour
 
         _collider.points = _points.ToArray();
 
-        inkDrawed = ((points[^1] - points[^2]).magnitude);
-        Player.Instance.inkLimit -= inkDrawed;
+        if (points.Count > 1)
+        {
+            inkDrawed = ((points[^1] - points[^2]).magnitude);
+            Player.Instance.inkLimit -= inkDrawed;
+        }
     }
 }

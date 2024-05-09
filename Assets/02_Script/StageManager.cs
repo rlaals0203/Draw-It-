@@ -9,7 +9,7 @@ public class StageManager : MonoBehaviour
     public static StageManager Instance = null;
 
     public GameObject[] maps;
-    private GameObject currentMap;
+    public GameObject currentMap;
 
     public static float[] inkLimits = { 10f, 6f, 4f, 10f, 10f };
     public float[] leastInk = new float[inkLimits.Length];
@@ -38,11 +38,6 @@ public class StageManager : MonoBehaviour
 
             currentMap = Instantiate(currentMap, new Vector3(0, 0, 0), Quaternion.identity);
             DontDestroyOnLoad(currentMap);
-        }
-
-        if (currentMap == null)
-        {
-            currentMap = Instantiate(currentMap, new Vector3(0, 0, 0), Quaternion.identity);
         }
     }
 

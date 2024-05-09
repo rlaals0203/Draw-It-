@@ -87,7 +87,9 @@ public class LineGenerator : MonoBehaviour
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             transform.position = new Vector3(mousePos.x, mousePos.y, 0);
-            activeLine.UpdateLine(mousePos);
+
+            if (activeLine != null)
+                activeLine.UpdateLine(mousePos);
         }
     }
 
@@ -101,7 +103,6 @@ public class LineGenerator : MonoBehaviour
             Player.Instance.inkLimit += lineLengthList[^1];
             lineLengthList.Remove(lineLengthList[^1]);
         }
-
     }
 
     private void ResetLine()

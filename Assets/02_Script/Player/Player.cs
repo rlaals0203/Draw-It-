@@ -33,6 +33,7 @@ public class Player : MonoBehaviour
     private void Update()
     {
         inkLeft = inkLimit / inkLimitOrigin;
+
         if (inkLimit <= 0)
         {
             isEnoughInk = false;
@@ -40,13 +41,16 @@ public class Player : MonoBehaviour
         else
             isEnoughInk = true;
 
-        if (transform.position.y < -10)
+        if (transform.position.y < -15)
         {
             ResetPlayer();
+
             isReset = true;
             isStart = false;
-            inkLimit = inkLimitOrigin;
+
             Portal.count = 1;
+
+            inkLimit = inkLimitOrigin;
         }
 
         if (isComplete)
@@ -79,7 +83,8 @@ public class Player : MonoBehaviour
 
         if (collision.tag == "Gear")
         {
-            transform.position = new Vector2(0, -10);
+            transform.position = new Vector2(0, -15);
+            isStart = false;
         }
     }
 }
