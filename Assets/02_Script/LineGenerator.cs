@@ -112,8 +112,8 @@ public class LineGenerator : MonoBehaviour
             Destroy(GameObject.Find($"Line{i}"));
         }
 
-        Player.Instance.isReset = false;
         count = 0;
+        Player.Instance.isReset = false;
     }
 
     private void GenerateCollider(LineRenderer line)

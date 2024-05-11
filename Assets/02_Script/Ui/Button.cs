@@ -26,8 +26,7 @@ public class Button : MonoBehaviour
     public void OnResetClick()
     {
         ChangeUI(true);
-        ball.transform.position = new Vector3(0, -15, 0);
-        Player.Instance.isStart = false;
+        Player.Instance.ResetPlayer();
     }
 
     private void ChangeUI(bool value)

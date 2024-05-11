@@ -11,9 +11,9 @@ public class Player : MonoBehaviour
     public float inkLeft = 0;
 
     public bool isComplete = false;
-    public bool isReset = false;
     public bool isEnoughInk = true;
     public bool isStart = false;
+    public bool isReset = false;
 
     private Rigidbody2D rb;
 
@@ -34,23 +34,17 @@ public class Player : MonoBehaviour
     {
         inkLeft = inkLimit / inkLimitOrigin;
 
-        if (inkLimit <= 0)
+        if (inkLeft <= 0)
         {
             isEnoughInk = false;
         }
         else
             isEnoughInk = true;
 
-        if (transform.position.y < -15)
+
+        if (transform.position.y < -15 || isReset)
         {
             ResetPlayer();
-
-            isReset = true;
-            isStart = false;
-
-            Portal.count = 1;
-
-            inkLimit = inkLimitOrigin;
         }
 
         if (isComplete)
@@ -59,12 +53,16 @@ public class Player : MonoBehaviour
         }
     }   
 
-    private void ResetPlayer()
+    public void ResetPlayer()
     {
+        isReset = true;
+        isStart = false;
+
+        inkLimit = inkLimitOrigin;
         rb.simulated = false;
         rb.velocity = new Vector2(0, 0);
+
         transform.position = GameObject.Find("PlayerPosition").transform.position;
-        isReset = false;
     }
 
     private void ChangeInkLimit()
@@ -83,8 +81,7 @@ public class Player : MonoBehaviour
 
         if (collision.tag == "Gear")
         {
-            transform.position = new Vector2(0, -15);
-            isStart = false;
+            ResetPlayer();
         }
     }
 }

@@ -11,7 +11,13 @@ public class ClearUI : MonoBehaviour
     [SerializeField] private GameObject clearUI;
     [SerializeField] private TMP_Text inkLeftUI;
 
+    [SerializeField] private RawImage star1;
+    [SerializeField] private RawImage star2;
+    [SerializeField] private RawImage star3;
+
     private bool isEnable = false;
+    private bool isNext = false;
+
     private Vector3 startPos;
 
     private void Start()
@@ -36,14 +42,21 @@ public class ClearUI : MonoBehaviour
 
     public void PlayAgain()
     {
-        Player.Instance.transform.position = new Vector2(0, -10);
-        Player.Instance.isStart = false;
+        Player.Instance.isReset = true;
         StartCoroutine(ClearUIUp());
     }
 
-    public void NextStage()
+    public void NextStageClick()
     {
+        isNext = true;
         StartCoroutine(ClearUIUp());
+    }
+
+    private void NextStage()
+    {
+        isNext = false;
+        StageManager.Instance.NextStage();
+        Player.Instance.ResetPlayer();
     }
 
     IEnumerator ClearUIDown()
@@ -69,11 +82,11 @@ public class ClearUI : MonoBehaviour
 
         clearUI.transform.DOMove(new Vector3(startPos.x, startPos.y, startPos.z), 0.75f);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.75f);
 
         background.gameObject.SetActive(false);
 
-        StageManager.Instance.NextStage();
-        Player.Instance.isStart = false;
+        if (isNext)
+            NextStage();
     }
 }
