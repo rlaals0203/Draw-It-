@@ -47,21 +47,21 @@ public class MenuButton : MonoBehaviour
 
     private void MoveDown()
     {
-        transform.DOMove(new Vector2(transform.position.x, transform.position.y + 1080), 0.75f).SetEase(Ease.OutCirc);
+        transform.DOMove(new Vector2(transform.position.x, transform.position.y + 1080), 0.75f).SetEase(Ease.InOutBack);
     }
 
     private void MoveUp()
     {
-        transform.DOMove(new Vector2(transform.position.x, transform.position.y - 1080), 0.75f).SetEase(Ease.OutCirc);
+        transform.DOMove(new Vector2(transform.position.x, transform.position.y - 1080), 0.75f).SetEase(Ease.InOutBack);
     }
 
     private void MoveRight()
     {
-        transform.DOMove(new Vector2(transform.position.x - 1920, transform.position.y), 0.75f).SetEase(Ease.OutCirc);
+        transform.DOMove(new Vector2(transform.position.x - 1920, transform.position.y), 0.75f).SetEase(Ease.InOutBack);
     }
 
     private void MoveLeft()
     {
-        transform.DOMove(new Vector2(transform.position.x + 1920, transform.position.y), 0.75f).SetEase(Ease.OutCirc); ;
+        transform.DOMove(new Vector2(transform.position.x + 1920, transform.position.y), 0.75f).SetEase(Ease.InOutBack); ;
     }
 }

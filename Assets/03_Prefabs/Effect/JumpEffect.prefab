@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1910731346124499758}
   - component: {fileID: 2610030817745628982}
   - component: {fileID: 8714503961347131909}
-  m_Layer: 0
+  m_Layer: 5
   m_Name: JumpEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}

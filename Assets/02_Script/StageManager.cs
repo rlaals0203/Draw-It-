@@ -11,7 +11,7 @@ public class StageManager : MonoBehaviour
     public GameObject[] maps;
     public GameObject currentMap;
 
-    public static float[] inkLimits = { 10f, 6f, 4f, 10f, 10f };
+    public static float[] inkLimits = { 12.5f, 7.5f, 6f, 10f, 10f };
     public float[] leastInk = new float[inkLimits.Length];
 
     private int currentLevel = 0;
@@ -34,7 +34,7 @@ public class StageManager : MonoBehaviour
         if (isStageClicked)
         {
             isStageClicked = false;
-            SceneManager.LoadSceneAsync("Level");
+            SceneManager.LoadScene("Level");
 
             currentMap = Instantiate(currentMap, new Vector3(0, 0, 0), Quaternion.identity);
             DontDestroyOnLoad(currentMap);

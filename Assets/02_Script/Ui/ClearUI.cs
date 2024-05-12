@@ -15,14 +15,28 @@ public class ClearUI : MonoBehaviour
     [SerializeField] private RawImage star2;
     [SerializeField] private RawImage star3;
 
+    [SerializeField] private RawImage Bstar1;
+    [SerializeField] private RawImage Bstar2;
+    [SerializeField] private RawImage Bstar3;
+
+    [SerializeField] private ParticleSystem starParticle;
+
+    WaitForSeconds starCool;
+
     private bool isEnable = false;
     private bool isNext = false;
 
     private Vector3 startPos;
 
+    private void Awake()
+    {
+        starCool = new WaitForSeconds(0.75f);
+    }
+
     private void Start()
     {
         startPos = clearUI.transform.position;
+        StartCoroutine(ClearUIDown());
     }
     private void Update()
     {
@@ -70,6 +84,10 @@ public class ClearUI : MonoBehaviour
         yield return new WaitForSeconds(0.1f);
 
         clearUI.transform.DOMove(new Vector3(clearUI.transform.position.x, 550, clearUI.transform.position.z), 0.75f);
+
+        yield return new WaitForSeconds(1f);
+
+        StartCoroutine(StarStamp());
     }
 
     IEnumerator ClearUIUp()
@@ -88,5 +106,38 @@ public class ClearUI : MonoBehaviour
 
         if (isNext)
             NextStage();
+    }
+
+    IEnumerator StarStamp()
+    {
+        StarAniamtion(star1, Bstar1);
+
+        yield return new WaitForSeconds(0.3f);
+
+        Instantiate(starParticle, star1.transform.position, Quaternion.identity);
+
+        yield return starCool;
+
+        StarAniamtion(star2, Bstar2);
+
+        yield return new WaitForSeconds(0.3f);
+
+        Instantiate(starParticle, star2.transform.position, Quaternion.identity);
+
+        yield return starCool;
+
+        StarAniamtion(star3, Bstar3);
+
+        yield return new WaitForSeconds(0.3f);
+
+        Instantiate(starParticle, star3.transform.position, Quaternion.identity);
+    }
+
+    private void StarAniamtion(RawImage star, RawImage Bstar)
+    {
+        star.gameObject.SetActive(true);
+        Bstar.gameObject.SetActive(true);
+        star.transform.DOScale(1f, 0.3f).SetEase(Ease.InExpo);
+        Bstar.transform.DOScale(1f, 0.3f).SetEase(Ease.InExpo);
     }
 }
