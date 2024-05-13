@@ -49,7 +49,7 @@ public class Player : MonoBehaviour
 
         if (isComplete)
         {
-            StageManager.Instance.SetLeastInk();
+            StageManager.Instance.SetMaxInk();
         }
     }   
 

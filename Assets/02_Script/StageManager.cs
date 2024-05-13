@@ -11,8 +11,8 @@ public class StageManager : MonoBehaviour
     public GameObject[] maps;
     public GameObject currentMap;
 
-    public static float[] inkLimits = { 12.5f, 7.5f, 6f, 10f, 10f };
-    public float[] leastInk = new float[inkLimits.Length];
+    public static float[] inkLimits = { 12.5f, 7.5f, 6f, 10f, 12.5f };
+    public float[] maxInk = new float[inkLimits.Length];
 
     private int currentLevel = 0;
 
@@ -53,11 +53,11 @@ public class StageManager : MonoBehaviour
         return inkLimits[currentLevel - 1];
     }
 
-    public void SetLeastInk()
+    public void SetMaxInk()
     {
-        if (inkLimits[currentLevel - 1] < Player.Instance.inkLeft)
+        if (maxInk[currentLevel - 1] < Player.Instance.inkLeft)
         {
-            inkLimits[currentLevel - 1] = Player.Instance.inkLeft;
+            maxInk[currentLevel - 1] = Player.Instance.inkLeft;
         }
     }
 

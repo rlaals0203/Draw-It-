@@ -23,8 +23,6 @@ public class ClearUI : MonoBehaviour
     private void Awake()
     {
         starCool = new WaitForSeconds(0.6f);
-
-        DontDestroyOnLoad(this);
     }
 
     private void Start()
@@ -108,15 +106,18 @@ public class ClearUI : MonoBehaviour
 
     IEnumerator StarStamp()
     {
-        StarAniamtion(0);
+        if (Player.Instance.inkLeft > 0.1f)
+            StarAniamtion(0);
 
         yield return starCool;
 
-        StarAniamtion(1);
+        if (Player.Instance.inkLeft > 0.33f)
+            StarAniamtion(1);
 
         yield return starCool;
 
-        StarAniamtion(2);
+        if (Player.Instance.inkLeft > 0.5f)
+            StarAniamtion(2);
     }
 
     private void StarAniamtion(int n)
