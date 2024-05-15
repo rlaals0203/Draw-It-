@@ -5,10 +5,10 @@ using System.Linq;
 
 public class Line : MonoBehaviour
 {
-    public LineRenderer lineRenderer;
+    [SerializeField] private LineRenderer lineRenderer;
     private float inkDrawed;
 
-    List<Vector2> points;
+    private List<Vector2> points;
 
     [SerializeField] private EdgeCollider2D _collider;
     private readonly List<Vector2> _points = new List<Vector2>();
@@ -17,6 +17,7 @@ public class Line : MonoBehaviour
     {
         _collider.transform.position -= transform.position;
     }
+
     public void UpdateLine(Vector2 position)
     {
         if (points == null)

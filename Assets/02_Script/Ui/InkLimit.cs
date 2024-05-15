@@ -10,6 +10,6 @@ public class InkLimit : MonoBehaviour
         transform.localScale = new Vector3(Mathf.Clamp(Player.Instance.inkLeft, 0f, 1f), 1f, 1f);
 
         transform.GetComponent<RawImage>().color = Color.HSVToRGB(Mathf.Clamp
-            (Player.Instance.inkLeft / 3.6f, 0, 100), 1, 1);
+            (Player.Instance.inkLeft / 3.6f, 0, 100), 0.75f, 1);
     }
 }

@@ -6,14 +6,14 @@ using System.Linq;
 [RequireComponent(typeof(EdgeCollider2D))]
 public class LineGenerator : MonoBehaviour
 {
-    public GameObject linePrefab;
-    GameObject newLine;
+    [SerializeField] private GameObject linePrefab;
+    private GameObject newLine;
 
     private int count = 0;
     private float lineLength = 0;
 
-    List<float> lineLengthList = new List<float>();
-    Line activeLine;
+    private List<float> lineLengthList = new List<float>();
+    private Line activeLine;
 
     private void Update()
     {
