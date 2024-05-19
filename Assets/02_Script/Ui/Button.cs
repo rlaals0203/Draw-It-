@@ -21,6 +21,7 @@ public class Button : MonoBehaviour
         ChangeUI(false);
         ball.GetComponent<Rigidbody2D>().simulated = true;
         Player.Instance.isStart = true;
+        Portal.count = 1;
     }
 
     public void OnResetClick()

@@ -5,7 +5,7 @@ using UnityEngine;
 public class AntiDrawArea : MonoBehaviour
 {
     static public bool isAntiArea = false;
-    
+    static public bool isDrawableArea = false;
 
     private void Update()
     {
@@ -17,10 +17,20 @@ public class AntiDrawArea : MonoBehaviour
             {
                 isAntiArea = true;
             }
+            else if (hit.collider.tag == "DrawableArea")
+            {
+                isDrawableArea = true;
+            }
             else
+            {
                 isAntiArea = false;
+                isDrawableArea = false;
+            }
         }
         else
+        {
             isAntiArea = false;
+            isDrawableArea = false;
+        }
     }
 }
