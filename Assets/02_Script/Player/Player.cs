@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
 {
     public static Player Instance = null;
 
+    public int money = 0;
+
     public float inkLimitOrigin = 1;
     public float inkLimit = 1;
     public float inkLeft = 0;
@@ -42,7 +44,7 @@ public class Player : MonoBehaviour
             isEnoughInk = true;
 
 
-        if (transform.position.y < -15 || isReset)
+        if (transform.position.y < -10 || isReset)
         {
             ResetPlayer();
         }

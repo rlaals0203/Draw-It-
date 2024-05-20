@@ -13,12 +13,12 @@ public class Button : MonoBehaviour
     {
         if (Player.Instance.isReset)
         {
-            ChangeUI(true);
+            StartButton();
         }
     }
     public void OnStartClick()
     {
-        ChangeUI(false);
+        ResetButton();
         ball.GetComponent<Rigidbody2D>().simulated = true;
         Player.Instance.isStart = true;
         Portal.count = 1;
@@ -26,13 +26,19 @@ public class Button : MonoBehaviour
 
     public void OnResetClick()
     {
-        ChangeUI(true);
+        StartButton();
         Player.Instance.ResetPlayer();
     }
 
-    private void ChangeUI(bool value)
+    private void StartButton()
     {
-        startButton.gameObject.SetActive(value);
-        resetButton.gameObject.SetActive(!value);
+        startButton.gameObject.SetActive(true);
+        resetButton.gameObject.SetActive(false);
+    }
+
+    private void ResetButton()
+    {
+        startButton.gameObject.SetActive(false);
+        resetButton.gameObject.SetActive(true);
     }
 }

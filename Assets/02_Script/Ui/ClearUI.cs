@@ -124,6 +124,7 @@ public class ClearUI : MonoBehaviour
     {
         star[n].gameObject.SetActive(true);
         star[n].transform.DOScale(1f, 0.4f).SetEase(Ease.InBack);
+        Player.Instance.money += 5;
     }
 
     private void SetStarDefault(int n)

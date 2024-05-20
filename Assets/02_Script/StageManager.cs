@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using System;
 
 public class StageManager : MonoBehaviour
@@ -15,6 +16,7 @@ public class StageManager : MonoBehaviour
     public float[] maxInk = new float[inkLimits.Length];
 
     private int currentLevel = 0;
+    public int bestLevel = 1;
 
     public bool isStageClicked = false;
 
@@ -38,6 +40,14 @@ public class StageManager : MonoBehaviour
 
             currentMap = Instantiate(currentMap, new Vector3(0, 0, 0), Quaternion.identity);
             DontDestroyOnLoad(currentMap);
+        }
+
+        if (bestLevel < currentLevel)
+            currentLevel = bestLevel;
+
+        if (GameObject.Find(bestLevel.ToString()))
+        {
+            Button button = GameObject.Find(bestLevel.ToString()).GetComponent<Button>();
         }
     }
 
