@@ -11,7 +11,7 @@ public class Button : MonoBehaviour
 
     private void Update()
     {
-        if (Player.Instance.isReset)
+        if (Player.Instance.isReset || Player.Instance.isComplete)
         {
             StartButton();
         }

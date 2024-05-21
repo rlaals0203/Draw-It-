@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
 
         inkLimit = inkLimitOrigin;
         rb.simulated = false;
-        rb.velocity = new Vector2(0, 0);
+        rb.velocity = new Vector3(0, 0, 0);
 
         transform.position = GameObject.Find("PlayerPosition").transform.position;
     }

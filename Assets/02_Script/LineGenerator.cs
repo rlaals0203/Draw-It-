@@ -114,7 +114,7 @@ public class LineGenerator : MonoBehaviour
         }
 
         count = 0;
-        Player.Instance.isReset = false;
+        StartCoroutine(ResetRoutine());
     }
 
     private void GenerateCollider(LineRenderer line)
@@ -128,5 +128,11 @@ public class LineGenerator : MonoBehaviour
         }
 
         newLine.GetComponent<EdgeCollider2D>().SetPoints(edges);
+    }
+
+    IEnumerator ResetRoutine()
+    {
+        yield return new WaitForSeconds(0.05f);
+        Player.Instance.isReset = false;
     }
 }
