@@ -15,8 +15,8 @@ public class SuperJump : MonoBehaviour
     {
         if (collision.CompareTag("SuperJump"))
         {
-            rb.velocity = new Vector2(rb.velocity.x, 0);
-            rb.AddForce(Vector2.up * Time.deltaTime  * jumpPower, ForceMode2D.Impulse);
+            rb.velocity = new Vector2(rb.velocity.x / 1.25f, 0);
+            rb.AddForce(collision.transform.up * Time.deltaTime  * jumpPower, ForceMode2D.Impulse);
         }
     }
 }
