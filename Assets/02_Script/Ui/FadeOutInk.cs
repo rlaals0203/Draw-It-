@@ -5,14 +5,13 @@ using UnityEngine;
 public class FadeOutInk : MonoBehaviour
 {
     [SerializeField] private GameObject slider;
-
+    private bool isPlayerEntered = false;   
 
     void Update()
     {
         RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
 
-        print(hit.collider);
-        if (hit.collider.tag == "FadeOutInk" && hit.collider != null)
+        if ((hit.collider.tag == "FadeOutInk" && hit.collider != null) || isPlayerEntered)
         {
             slider.SetActive(false);
         }
@@ -24,13 +23,15 @@ public class FadeOutInk : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (collision.CompareTag("FadeOutInk"))
+        print("OnCollision");
+        if (collision.CompareTag("Player"))
         {
-            slider.SetActive(false);
+            isPlayerEntered = true;
         }
-        else
-        {
-            slider.SetActive(true);
-        }
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        isPlayerEntered = false;
     }
 }

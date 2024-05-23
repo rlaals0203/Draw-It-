@@ -43,7 +43,7 @@ public class StageManager : MonoBehaviour
         }
 
         if (bestLevel < currentLevel)
-            currentLevel = bestLevel;
+            bestLevel = currentLevel;
 
         if (GameObject.Find(bestLevel.ToString()))
         {
