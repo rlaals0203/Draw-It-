@@ -10,6 +10,7 @@ TagManager:
   - AntiDrawArea
   - Gear
   - FadeOutInk
+  - Background
   layers:
   - Default
   - TransparentFX

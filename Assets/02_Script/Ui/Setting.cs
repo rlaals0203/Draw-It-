@@ -21,6 +21,7 @@ public class Setting : MonoBehaviour
     {
         settingUI.SetActive(false);
     }
+
     private void Update()
     {
         bgm_Input.text = Mathf.RoundToInt(bgm_Slider.value * 100).ToString();

@@ -5,7 +5,7 @@ using UnityEngine;
 public class FadeOutInk : MonoBehaviour
 {
     [SerializeField] private GameObject slider;
-    private bool isPlayerEntered = false;   
+    private bool isPlayerEntered = false;
 
     void Update()
     {
@@ -14,6 +14,10 @@ public class FadeOutInk : MonoBehaviour
         if ((hit.collider.tag == "FadeOutInk" && hit.collider != null) || isPlayerEntered)
         {
             slider.SetActive(false);
+        }
+        else if (hit.collider.tag == "Background")
+        {
+            slider.SetActive(true);
         }
         else
         {
