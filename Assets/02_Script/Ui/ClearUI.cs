@@ -8,8 +8,12 @@ using UnityEngine.UI;
 public class ClearUI : MonoBehaviour
 {
     [SerializeField] private RawImage background;
+
     [SerializeField] private GameObject clearUI;
+    [SerializeField] private GameObject currencyUI;
+
     [SerializeField] private TMP_Text inkLeftUI;
+    [SerializeField] private TMP_Text starText;
 
     [SerializeField] private RawImage[] star;
 
@@ -18,7 +22,8 @@ public class ClearUI : MonoBehaviour
     private bool isEnable = false;
     private bool isNext = false;
 
-    private Vector3 startPos;
+    private Vector3 clearUIStartPos;
+    private Vector3 currencyUIStartPos;
 
     private void Awake()
     {
@@ -27,7 +32,10 @@ public class ClearUI : MonoBehaviour
 
     private void Start()
     {
-        startPos = clearUI.transform.position;
+        clearUIStartPos = clearUI.transform.position;
+        currencyUIStartPos = currencyUI.transform.position;
+
+        starText.text = StatManager.Instance.star.ToString();
     }
     private void Update()
     {
@@ -39,7 +47,7 @@ public class ClearUI : MonoBehaviour
         if (Player.Instance.isComplete && !isEnable)
         {
             isEnable = true;
-            StartCoroutine(ClearUIDown());
+            StartCoroutine(ClearUIActive());
         }
 
         inkLeftUI.text = $"³²Àº À×Å©·® : {Mathf.Round(Mathf.Abs(Player.Instance.inkLeft * 100)),4}%";
@@ -48,13 +56,13 @@ public class ClearUI : MonoBehaviour
     public void PlayAgain()
     {
         Player.Instance.isReset = true;
-        StartCoroutine(ClearUIUp());
+        StartCoroutine(ClearUIUnactive());
     }
 
     public void NextStageClick()
     {
         isNext = true;
-        StartCoroutine(ClearUIUp());
+        StartCoroutine(ClearUIUnactive());
     }
 
     private void NextStage()
@@ -64,7 +72,7 @@ public class ClearUI : MonoBehaviour
         Player.Instance.ResetPlayer();
     }
 
-    IEnumerator ClearUIDown()
+    IEnumerator ClearUIActive()
     {
         background.gameObject.SetActive(true);
 
@@ -74,14 +82,14 @@ public class ClearUI : MonoBehaviour
 
         yield return new WaitForSeconds(0.1f);
 
-        clearUI.transform.DOMove(new Vector3(clearUI.transform.position.x, 550, clearUI.transform.position.z), 0.75f);
+        ActiveUIMove();
 
         yield return new WaitForSeconds(1f);
 
         StartCoroutine(StarStamp());
     }
 
-    IEnumerator ClearUIUp()
+    IEnumerator ClearUIUnactive()
     {
         Player.Instance.isComplete = false;
 
@@ -89,7 +97,7 @@ public class ClearUI : MonoBehaviour
 
         yield return new WaitForSeconds(0.1f);
 
-        clearUI.transform.DOMove(new Vector3(startPos.x, startPos.y, startPos.z), 0.75f).SetEase(Ease.InBack);
+        InActiveUIMove();
 
         yield return new WaitForSeconds(0.85f);
 
@@ -124,12 +132,27 @@ public class ClearUI : MonoBehaviour
     {
         star[n].gameObject.SetActive(true);
         star[n].transform.DOScale(1f, 0.4f).SetEase(Ease.InBack);
-        Player.Instance.money += 5;
+
+        StatManager.Instance.GetStar(5);
+        starText.text = StatManager.Instance.star.ToString();
     }
 
     private void SetStarDefault(int n)
     {
         star[n].gameObject.SetActive(false);
         star[n].transform.localScale = new Vector3(2, 2, 1);
+    }
+
+    private void ActiveUIMove()
+    {
+        clearUI.transform.DOMove(new Vector3(clearUI.transform.position.x, 550, clearUI.transform.position.z), 0.75f);
+        currencyUI.transform.DOMove(new Vector3(1550, currencyUI.transform.position.y, clearUI.transform.position.z), 0.75f);
+    }
+    private void InActiveUIMove()
+    {
+        clearUI.transform.DOMove(new Vector3(clearUIStartPos.x, clearUIStartPos.y, clearUIStartPos.z), 0.75f).SetEase(Ease.InBack);
+
+        currencyUI.transform.DOMove(new Vector3(currencyUIStartPos.x, currencyUIStartPos.y,
+            currencyUIStartPos.z), 0.75f).SetEase(Ease.InBack);
     }
 }

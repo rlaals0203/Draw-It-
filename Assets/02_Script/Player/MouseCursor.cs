@@ -14,6 +14,6 @@ public class MouseCursor : MonoBehaviour
 
     private void setcursor()
     {
-        Cursor.SetCursor(cursortex, new Vector2(cursortex.width * 0.5f, cursortex.height * 0.5f), CursorMode.Auto);
+        Cursor.SetCursor(cursortex, new Vector2(cursortex.width * 0.1f, cursortex.height * 0.1f), CursorMode.Auto);
     }
 }

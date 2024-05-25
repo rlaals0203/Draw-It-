@@ -6,8 +6,6 @@ public class Player : MonoBehaviour
 {
     public static Player Instance = null;
 
-    public int money = 0;
-
     public float inkLimitOrigin = 1;
     public float inkLimit = 1;
     public float inkLeft = 0;
