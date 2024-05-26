@@ -35,11 +35,7 @@ public class StageManager : MonoBehaviour
     {
         if (isStageClicked)
         {
-            isStageClicked = false;
-            SceneManager.LoadScene("Level");
-
-            currentMap = Instantiate(currentMap, new Vector3(0, 0, 0), Quaternion.identity);
-            DontDestroyOnLoad(currentMap);
+            GenerateMap();
         }
 
         if (bestLevel < currentLevel)
@@ -49,6 +45,15 @@ public class StageManager : MonoBehaviour
         {
             Button button = GameObject.Find(bestLevel.ToString()).GetComponent<Button>();
         }
+    }
+
+    private void GenerateMap()
+    {
+        isStageClicked = false;
+        SceneManager.LoadScene("Level");
+
+        currentMap = Instantiate(currentMap, new Vector3(0, 0, 0), Quaternion.identity);
+        DontDestroyOnLoad(currentMap);
     }
 
     public void OnStageClick()

@@ -7,25 +7,19 @@ public class AntiDrawArea : MonoBehaviour
     static public bool isAntiArea = false;
     static public bool isDrawableArea = false;
 
+    Ray2D ray;
+    RaycastHit2D hit;
+
     private void Update()
     {
-        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-
-        if (hit.collider != null)
+        hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+        if (hit.collider.tag == "Block" || hit.collider.tag == "AntiDrawArea")
         {
-            if (hit.collider.tag == "Block" || hit.collider.tag == "AntiDrawArea")
-            {
-                isAntiArea = true;
-            }
-            else if (hit.collider.tag == "DrawableArea")
-            {
-                isDrawableArea = true;
-            }
-            else
-            {
-                isAntiArea = false;
-                isDrawableArea = false;
-            }
+            isAntiArea = true;
+        }
+        else if (hit.collider.tag == "DrawableArea")
+        {
+            isDrawableArea = true;
         }
         else
         {

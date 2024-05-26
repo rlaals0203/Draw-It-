@@ -99,7 +99,7 @@ public class ClearUI : MonoBehaviour
 
         InActiveUIMove();
 
-        yield return new WaitForSeconds(0.85f);
+        yield return new WaitForSeconds(0.9f);
 
         background.gameObject.SetActive(false);
 
@@ -132,6 +132,8 @@ public class ClearUI : MonoBehaviour
     {
         star[n].gameObject.SetActive(true);
         star[n].transform.DOScale(1f, 0.4f).SetEase(Ease.InBack);
+        Camera.main.transform.DOShakePosition(0.2f, 0.5f, 50, 50);
+        clearUI.transform.DOShakePosition(0.2f, 50f, 50, 50);
 
         StatManager.Instance.GetStar(5);
         starText.text = StatManager.Instance.star.ToString();

@@ -27,7 +27,6 @@ public class FadeOutInk : MonoBehaviour
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        print("OnCollision");
         if (collision.CompareTag("Player"))
         {
             isPlayerEntered = true;
