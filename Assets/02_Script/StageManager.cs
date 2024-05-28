@@ -15,6 +15,8 @@ public class StageManager : MonoBehaviour
     public static float[] inkLimits = { 12.5f, 7.5f, 6f, 10f, 12.5f };
     public float[] maxInk = new float[inkLimits.Length];
 
+    public bool[] stagePlayed = new bool[inkLimits.Length];
+
     private int currentLevel = 0;
     public int bestLevel = 1;
 
@@ -29,6 +31,14 @@ public class StageManager : MonoBehaviour
 
         Instance = this;
         DontDestroyOnLoad(this);
+    }
+
+    private void Start()
+    {
+        for (int i = 0; i < stagePlayed.Length - 1; i++)
+        {
+            stagePlayed[i] = false;
+        }
     }
 
     private void Update()
@@ -61,6 +71,11 @@ public class StageManager : MonoBehaviour
         currentLevel = int.Parse(UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name);
         currentMap = maps[currentLevel - 1];
         isStageClicked = true;
+
+        if (!stagePlayed[currentLevel - 1])
+        {
+            stagePlayed[currentLevel - 1] = true;
+        }
     }
 
     public float GetInkLimit()
@@ -82,5 +97,10 @@ public class StageManager : MonoBehaviour
         Destroy(currentMap);
         currentMap = maps[currentLevel - 1];
         isStageClicked = true;
+    }
+
+    public int FirstPlayed()
+    {
+        return currentLevel;
     }
 }

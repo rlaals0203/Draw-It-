@@ -17,7 +17,6 @@ public class StageCompleteAnimation : MonoBehaviour
         if (Player.Instance.isReset)
         {
             isEnable = false;
-            Debug.Log("¸®¼Â");
         }
 
         if (Player.Instance.isComplete && !isEnable)
