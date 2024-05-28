@@ -17,13 +17,24 @@ public class StatManager : MonoBehaviour
         }
 
         Instance = this;
-
+        DontDestroyOnLoad(this);
         star = PlayerPrefs.GetInt("Star");
 }
 
-    public void GetStar(int value)
+    public int GetStar()
+    {
+        return star;
+    }
+
+    public void AddStar(int value)
     {
         star += value;
+        PlayerPrefs.SetInt("Star", star);
+    }
+
+    public void RemoveStar(int value)
+    {
+        star -= value;
         PlayerPrefs.SetInt("Star", star);
     }
 }

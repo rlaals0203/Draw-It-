@@ -135,7 +135,7 @@ public class ClearUI : MonoBehaviour
         Camera.main.transform.DOShakePosition(0.2f, 0.5f, 50, 50);
         clearUI.transform.DOShakePosition(0.2f, 50f, 50, 50);
 
-        StatManager.Instance.GetStar(5);
+        StatManager.Instance.AddStar(5);
         starText.text = StatManager.Instance.star.ToString();
     }
 

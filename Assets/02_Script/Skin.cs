@@ -4,15 +4,7 @@ using UnityEngine;
 
 public class Skin : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    [SerializeField] Sprite skin;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+
 }
