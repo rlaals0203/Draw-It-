@@ -9,8 +9,6 @@ public class Shop : MonoBehaviour
     private bool[] isPurchased = new bool[9];
     private int[] price = new int[9];
 
-    string itemName;
-
     private void Start()
     {
         for (int i = 0; i < isPurchased.Length - 1; i++)
@@ -24,20 +22,21 @@ public class Shop : MonoBehaviour
 
     public void OnItemClicked()
     {
-        int star = StatManager.Instance.GetStar();
         GameObject button = EventSystem.current.currentSelectedGameObject;
-        int n = int.Parse(button.name) - 1;
-        Debug.Log(star);
 
-        if (star >= price[n] && !isPurchased[n])
+        int star = StatManager.Instance.GetStar();
+        int index = int.Parse(button.name.Substring(4, 1)) - 1;
+
+        if (star >= price[index] && !isPurchased[index])
         {
-            StatManager.Instance.RemoveStar(price[n]);
+            StatManager.Instance.RemoveStar(price[index]);
             GameObject.Find(button.name).GetComponentInChildren<TMP_Text>().text = "소유중";
 
-            itemName = button.transform.parent.name;
-            isPurchased[n] = true;
+            Player.Instance.skinName = button.transform.parent.name;
+            isPurchased[index] = true;
 
-            Debug.Log($"{itemName} 스킨 구매 완료 남은 금액 : {StatManager.Instance.star}");
+            Debug.Log(GameObject.Find(button.name).GetComponentInChildren<TMP_Text>().name);
+            Debug.Log($"{Player.Instance.skinName} 스킨 구매 완료 남은 금액 : {StatManager.Instance.star}");
         }
         else
         {
