@@ -24,7 +24,7 @@ public class Tutorial : MonoBehaviour
 
     private void Start()
     {
-        
+
     }
 
     private void Update()
@@ -33,6 +33,8 @@ public class Tutorial : MonoBehaviour
         {
             GenerateTutorial();
         }
+
+        print(stageNumber);
     }
 
     private void GenerateTutorial()
