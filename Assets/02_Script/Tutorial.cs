@@ -33,8 +33,6 @@ public class Tutorial : MonoBehaviour
         {
             GenerateTutorial();
         }
-
-        print(stageNumber);
     }
 
     private void GenerateTutorial()

@@ -19,6 +19,8 @@ public class StatManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(this);
         star = PlayerPrefs.GetInt("Star");
+
+        star = 0;
 }
 
     public int GetStar()

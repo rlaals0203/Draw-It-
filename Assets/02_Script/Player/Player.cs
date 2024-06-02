@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
     public float inkLimit = 1;
     public float inkLeft = 0;
 
-    public string skinName;
+    public string skinName = " ";
 
     public bool isComplete = false;
     public bool isEnoughInk = true;

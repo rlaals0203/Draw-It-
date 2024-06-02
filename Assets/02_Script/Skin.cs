@@ -14,7 +14,7 @@ public class Skin : MonoBehaviour
 
     private void Update()
     {
-        if (Player.Instance.isReset)
+        if (!Player.Instance.isStart)
         {
             SetSkin();
         }
@@ -24,7 +24,7 @@ public class Skin : MonoBehaviour
     {
         foreach (Sprite sprite in spriteList)
         {
-            if (sprite.name == Player.Instance.skinName)
+            if (sprite.name == Shop.skinName)
             {
                 spriteRenderer.sprite = sprite;
                 break;

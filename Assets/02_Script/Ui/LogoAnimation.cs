@@ -6,6 +6,10 @@ using UnityEngine.EventSystems;
 
 public class LogoAnimation : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
+    [SerializeField] private bool isOnMouseAnim = true;
+    [SerializeField] private float maxRotate = 10;
+    [SerializeField] private float moveTime = 2;
+
     private void Start()
     {
         StartCoroutine(ImageAnimation());
@@ -13,25 +17,27 @@ public class LogoAnimation : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
 
     private void OnMouseAnimation()
     {
-        transform.DOScale(1.5f, 0.5f).SetEase(Ease.OutElastic);
+        if (isOnMouseAnim)
+            transform.DOScale(1.5f, 0.5f).SetEase(Ease.OutElastic);
     }
 
     private void ExitMouseAnimation()
     {
-        transform.DOScale(1f, 0.25f).SetEase(Ease.OutCubic);
+        if (isOnMouseAnim)
+            transform.DOScale(1f, 0.25f).SetEase(Ease.OutCubic);
     }
 
     private IEnumerator ImageAnimation()
     {
         while (true)
         {
-            transform.DORotate(new Vector3(0, 0, 10), 2f).SetEase(Ease.InOutSine);
+            transform.DORotate(new Vector3(0, 0, maxRotate), moveTime).SetEase(Ease.InOutSine);
 
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(moveTime);
 
-            transform.DORotate(new Vector3(0, 0, -10), 2f).SetEase(Ease.InOutSine);
+            transform.DORotate(new Vector3(0, 0, -maxRotate), moveTime).SetEase(Ease.InOutSine);
 
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(moveTime);
         }
     }
 
