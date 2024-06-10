@@ -48,10 +48,10 @@ public class Shop : MonoBehaviour
 
     private void Start()
     {
-        for (int i = 0; i < isPurchased.Length - 1; i++)
+        for (int i = 0; i < isPurchased.Length; i++)
             isPurchased[i] = false;
 
-        for (int i = 0; i < price.Length - 1; i++)
+        for (int i = 0; i < price.Length; i++)
             price[i] = 100;
     }
 

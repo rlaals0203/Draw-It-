@@ -20,7 +20,7 @@ public class StatManager : MonoBehaviour
         DontDestroyOnLoad(this);
         star = PlayerPrefs.GetInt("Star");
 
-        star = 0;
+        star = 5555;
 }
 
     public int GetStar()

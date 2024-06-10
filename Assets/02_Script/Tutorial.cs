@@ -8,7 +8,7 @@ public class Tutorial : MonoBehaviour
     private int prevStage;
 
     private GameObject tutorial;
-    private GameObject skipButton;
+    [SerializeField] private GameObject skipButton;
 
     private GameObject tutorialParent;
 
@@ -22,14 +22,9 @@ public class Tutorial : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-
-    }
-
     private void Update()
     {
-        if (!StageManager.Instance.stagePlayed[stageNumber])
+        if (!StageManager.Instance.stagePlayed[stageNumber] && GameObject.Find("Canvas"))
         {
             GenerateTutorial();
         }
@@ -37,20 +32,27 @@ public class Tutorial : MonoBehaviour
 
     private void GenerateTutorial()
     {
-        tutorialParent = GameObject.Find("Tutorial");
-        skipButton = GameObject.Find("SkipButton");
+        FindObject();
 
-        skipButton.SetActive(true);
+        if (skipButton != null)
+            skipButton.SetActive(true);
+
+        if (skipButton == null)
+        {
+            GenerateTutorial();
+            return;
+            print("aaa");
+        }
 
         StageManager.Instance.stagePlayed[stageNumber] = true;
         tutorial = tutorialParent.transform.Find($"Tutorial{stageNumber}").gameObject;
 
-        tutorial.SetActive(true);
+        if (tutorial != null)
+            tutorial.SetActive(true);
     }
 
     public void TutorialClicked()
     {
-        skipButton.SetActive(true);
         GenerateTutorial();
     }
 
@@ -64,5 +66,11 @@ public class Tutorial : MonoBehaviour
         tutorial.SetActive(false);
         skipButton.SetActive(false);
         Player.Instance.isStart = false;
+    }
+
+    private void FindObject()
+    {
+        tutorialParent = GameObject.Find("Tutorial");
+        //skipButton = GameObject.Find("SkipButton");
     }
 }

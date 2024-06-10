@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Button : MonoBehaviour
+public class Buttons : MonoBehaviour
 {
     [SerializeField] private GameObject ball;
     [SerializeField] private GameObject startButton;

@@ -12,7 +12,7 @@ public class StageManager : MonoBehaviour
     public GameObject[] maps;
     public GameObject currentMap;
 
-    public static float[] inkLimits = { 12.5f, 7.5f, 6f, 10f, 12.5f, 10f };
+    public static float[] inkLimits = { 12.5f, 7.5f, 6f, 10f, 12.5f, 10f, 10f, 10f, 10f };
     public float[] maxInk = new float[inkLimits.Length];
 
     public bool[] stagePlayed = new bool[15];
@@ -43,11 +43,6 @@ public class StageManager : MonoBehaviour
 
     private void Update()
     {
-        if (isStageClicked)
-        {
-            GenerateMap();
-        }
-
         if (bestLevel < currentLevel)
             bestLevel = currentLevel;
 
@@ -59,8 +54,8 @@ public class StageManager : MonoBehaviour
 
     private void GenerateMap()
     {
-        isStageClicked = false;
-        SceneManager.LoadScene("Level");
+        if (SceneManager.GetActiveScene().name != "Level")
+            SceneManager.LoadScene("Level");
 
         currentMap = Instantiate(currentMap, new Vector3(0, 0, 0), Quaternion.identity);
         DontDestroyOnLoad(currentMap);
@@ -70,12 +65,13 @@ public class StageManager : MonoBehaviour
     {
         currentLevel = int.Parse(UnityEngine.EventSystems.EventSystem.current.currentSelectedGameObject.name);
         currentMap = maps[currentLevel - 1];
-        isStageClicked = true;
 
         if (!stagePlayed[currentLevel - 1])
         {
             stagePlayed[currentLevel - 1] = true;
         }
+
+        GenerateMap();
     }
 
     public float GetInkLimit()
@@ -96,7 +92,7 @@ public class StageManager : MonoBehaviour
         currentLevel++;
         Destroy(currentMap);
         currentMap = maps[currentLevel - 1];
-        isStageClicked = true;
+        GenerateMap();
     }
 
     public int FirstPlayed()

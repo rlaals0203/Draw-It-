@@ -7,22 +7,43 @@ public class FadeOutInk : MonoBehaviour
     [SerializeField] private GameObject slider;
     private bool isPlayerEntered = false;
 
+    private Vector3 _mousePos;
+
     void Update()
     {
-        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+        MousePosRay();
+        SetFade();
+    }
 
-        if ((hit.collider.tag == "FadeOutInk" && hit.collider != null) || isPlayerEntered)
+    private void MousePosRay()
+    {
+        _mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        _mousePos.z = 0;
+        RaycastHit2D hit = Physics2D.Raycast(_mousePos, Vector2.zero, Mathf.Infinity);
+
+        if (hit)
         {
-            slider.SetActive(false);
-        }
-        else if (hit.collider.tag == "Background")
-        {
-            slider.SetActive(true);
+            if (hit.collider.CompareTag("FadeOutInk"))
+            {
+                isPlayerEntered = true;
+            }
+            else
+            {
+                isPlayerEntered = false;
+            }
         }
         else
         {
-            slider.SetActive(true);
+            isPlayerEntered = false;
         }
+    }
+
+    private void SetFade()
+    {
+        if (isPlayerEntered)
+            slider.SetActive(false);
+        else
+            slider.SetActive(true);
     }
 
     private void OnTriggerStay2D(Collider2D collision)
