@@ -16,8 +16,9 @@ public class StatManager : MonoBehaviour
             Destroy(gameObject);
         }
 
+        DontDestroyOnLoad(transform.parent);
+
         Instance = this;
-        DontDestroyOnLoad(this);
         star = PlayerPrefs.GetInt("Star");
 
         star = 5555;

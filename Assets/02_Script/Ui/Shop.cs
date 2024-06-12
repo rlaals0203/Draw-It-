@@ -81,6 +81,8 @@ public class Shop : MonoBehaviour
 
     private void Purchase(int index, GameObject button)
     {
+        AudioManager.PlaySound(SoundType.PURCHASE);
+
         if (prevSkin != null)
             prevSkin.text = "º“¿Ø¡ﬂ";
 

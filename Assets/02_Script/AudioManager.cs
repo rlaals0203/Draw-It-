@@ -1,27 +1,43 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
+
+public enum SoundType
+{
+    CLICK,
+    COMPLETE,
+    JUMP,
+    PURCHASE,
+    PURCHASE_FAIL,
+}
+
+[RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
 {
-    [SerializeField] private AudioClip[] musicClips;
-    [SerializeField] private AudioClip[] sfxClips;
+    public static AudioManager Instance = null;
 
-    [SerializeField] private AudioSource musicSource;
-    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioClip[] soundList;
+    private AudioSource audioSource;
 
-    public void PlayMusic(string name)
+    private void Awake()
     {
-        AudioClip s = Array.Find(musicClips, x => x.name == name);
-
-        if (s == null)
+        if (Instance != null)
         {
-            Debug.Log("음악을 찾을수 없습니다");
+            Destroy(gameObject);
         }
-        else
-        {
+        Instance = this;
 
-        }
+        DontDestroyOnLoad(this);
+    }
+
+    private void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
+    public static void PlaySound(SoundType sound, float volume = 1)
+    {
+        Instance.audioSource.PlayOneShot(Instance.soundList[(int)sound], volume);
     }
 }

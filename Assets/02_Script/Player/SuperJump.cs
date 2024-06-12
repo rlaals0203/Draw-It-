@@ -17,6 +17,7 @@ public class SuperJump : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x / 1.25f, 0);
             rb.AddForce(collision.transform.up * Time.deltaTime  * jumpPower, ForceMode2D.Impulse);
+            AudioManager.PlaySound(SoundType.JUMP);
         }
     }
 }

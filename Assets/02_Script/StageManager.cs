@@ -30,7 +30,6 @@ public class StageManager : MonoBehaviour
         }
 
         Instance = this;
-        DontDestroyOnLoad(this);
     }
 
     private void Start()
