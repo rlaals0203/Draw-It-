@@ -15,7 +15,9 @@ public class StageManager : MonoBehaviour
     public static float[] inkLimits = { 12.5f, 7.5f, 6f, 10f, 12.5f, 10f, 10f, 10f, 10f };
     public float[] maxInk = new float[inkLimits.Length];
 
-    public bool[] stagePlayed = new bool[15];
+    public int[] starCount = new int[10];
+
+    public bool[] stagePlayed = new bool[10];
 
     private int currentLevel = 0;
     public int bestLevel = 1;
@@ -37,7 +39,9 @@ public class StageManager : MonoBehaviour
         for (int i = 0; i < stagePlayed.Length - 1; i++)
         {
             stagePlayed[i] = false;
+            starCount[i] = 0;
         }
+        Debug.Log("Start");
     }
 
     private void Update()
