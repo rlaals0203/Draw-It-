@@ -13,10 +13,15 @@ public class Intro : MonoBehaviour
     [SerializeField] private TMP_Text korean;
     [SerializeField] private TMP_Text english;
 
+    private bool _introPlayed = false;
+
     private void Start()
     {
-        intro.SetActive(true);
-        StartCoroutine(IntroRoutine());
+        if (!_introPlayed)
+        {
+            intro.SetActive(true);
+            StartCoroutine(IntroRoutine());
+        }
     }
 
     IEnumerator IntroRoutine()
@@ -58,5 +63,7 @@ public class Intro : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         intro.SetActive(false);
+
+        _introPlayed = true;
     }
 }

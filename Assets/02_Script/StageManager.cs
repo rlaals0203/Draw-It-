@@ -18,6 +18,7 @@ public class StageManager : MonoBehaviour
     public int[] starCount = new int[10];
 
     public bool[] stagePlayed = new bool[10];
+    public bool[] stageComplete = new bool[10];
 
     private int currentLevel = 0;
     public int bestLevel = 1;
@@ -39,9 +40,9 @@ public class StageManager : MonoBehaviour
         for (int i = 0; i < stagePlayed.Length - 1; i++)
         {
             stagePlayed[i] = false;
+            stageComplete[i] = false;
             starCount[i] = 0;
         }
-        Debug.Log("Start");
     }
 
     private void Update()
@@ -93,6 +94,7 @@ public class StageManager : MonoBehaviour
     public void NextStage()
     {
         currentLevel++;
+        Debug.Log(currentLevel);
         Destroy(currentMap);
         currentMap = maps[currentLevel - 1];
         GenerateMap();

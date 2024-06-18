@@ -31,6 +31,11 @@ public class Shop : MonoBehaviour
         "우주 최강의 공 스킨이다. 오직 최강자만이 가질수 있다.",
     };
 
+    private void Start()
+    {
+
+    }
+
     private int star
     {
         get => StatManager.Instance.GetStar();
@@ -44,15 +49,6 @@ public class Shop : MonoBehaviour
             else
                 star = value;
         }
-    }
-
-    private void Start()
-    {
-        for (int i = 0; i < isPurchased.Length; i++)
-            isPurchased[i] = false;
-
-        for (int i = 0; i < price.Length; i++)
-            price[i] = 100;
     }
 
     public void OnItemClicked()

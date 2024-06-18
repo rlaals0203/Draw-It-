@@ -34,14 +34,10 @@ public class Tutorial : MonoBehaviour
     {
         FindObject();
 
-        if (skipButton != null)
-            skipButton.SetActive(true);
-
         if (skipButton == null)
         {
             GenerateTutorial();
             return;
-            print("aaa");
         }
 
         StageManager.Instance.stagePlayed[stageNumber] = true;
@@ -49,6 +45,11 @@ public class Tutorial : MonoBehaviour
 
         if (tutorial != null)
             tutorial.SetActive(true);
+        else
+            return;
+
+        if (skipButton != null)
+            skipButton.SetActive(true);
     }
 
     public void TutorialClicked()
@@ -71,6 +72,5 @@ public class Tutorial : MonoBehaviour
     private void FindObject()
     {
         tutorialParent = GameObject.Find("Tutorial");
-        //skipButton = GameObject.Find("SkipButton");
     }
 }
