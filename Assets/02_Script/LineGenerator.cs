@@ -94,7 +94,7 @@ public class LineGenerator : MonoBehaviour
         }
     }
 
-    private void DeleteLine()
+    public void DeleteLine()
     {
         Destroy(GameObject.Find($"Line{count - 1}"));
         count--;
