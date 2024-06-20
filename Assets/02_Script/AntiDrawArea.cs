@@ -7,8 +7,6 @@ public class AntiDrawArea : MonoBehaviour
     static public bool isAntiArea = false;
     static public bool isDrawableArea = false;
 
-    private bool isHit = false;
-
     private Vector3 _mousePos;
 
     private void Update()

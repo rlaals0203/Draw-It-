@@ -13,15 +13,16 @@ public class Intro : MonoBehaviour
     [SerializeField] private TMP_Text korean;
     [SerializeField] private TMP_Text english;
 
-    private bool _introPlayed = false;
-
     private void Start()
     {
-        if (!_introPlayed)
+        if (!StatManager.Instance.isPlayed)
         {
+            StopAllCoroutines();
             intro.SetActive(true);
             StartCoroutine(IntroRoutine());
         }
+        else
+            return;
     }
 
     IEnumerator IntroRoutine()
@@ -64,6 +65,6 @@ public class Intro : MonoBehaviour
 
         intro.SetActive(false);
 
-        _introPlayed = true;
+        StatManager.Instance.isPlayed = true;
     }
 }

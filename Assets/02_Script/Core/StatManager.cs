@@ -9,6 +9,8 @@ public class StatManager : MonoBehaviour
     public int star = 0;
     public int diamond = 0;
 
+    public bool isPlayed = false;
+
     private void Awake()
     {
         if (Instance != null)

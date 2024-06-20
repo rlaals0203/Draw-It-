@@ -79,6 +79,7 @@ public class Player : MonoBehaviour
         if (collision.tag == "StageEnd")
         {
             isComplete = true;
+            AudioManager.PlaySound(SoundType.COMPLETE);
         }
 
         if (collision.tag == "Gear")

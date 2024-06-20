@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 
 public enum SoundType
@@ -16,6 +17,8 @@ public enum SoundType
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance = null;
+
+    [SerializeField] private Slider sliderSFX;
 
     [SerializeField] private AudioClip[] soundList;
     private AudioSource audioSource;
