@@ -74,6 +74,7 @@ public class ClearUI : MonoBehaviour
 
     IEnumerator ClearUIActive()
     {
+        Player.Instance.isCompleteAnimEnd = false;
         background.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(3.5f);
@@ -91,8 +92,6 @@ public class ClearUI : MonoBehaviour
 
     IEnumerator ClearUIUnactive()
     {
-        Player.Instance.isComplete = false;
-
         background.DOFade(0f, 0.5f);
 
         yield return new WaitForSeconds(0.1f);
@@ -119,7 +118,7 @@ public class ClearUI : MonoBehaviour
 
         yield return starCool;
 
-        if (Player.Instance.inkLeft > 0.33f)
+        if (Player.Instance.inkLeft > 0.333f)
             StarAniamtion(1);
 
         yield return starCool;

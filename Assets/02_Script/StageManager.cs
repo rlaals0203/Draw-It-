@@ -12,8 +12,8 @@ public class StageManager : MonoBehaviour
     public GameObject[] maps;
     public GameObject currentMap;
 
-    public static float[] inkLimits = { 12.5f, 7.5f, 6f, 10f, 12.5f, 10f, 10f, 10f, 10f };
-    public float[] maxInk = new float[inkLimits.Length];
+    [SerializeField] private float[] inkLimits = { 12.5f, 7.5f, 6f, 10f, 12.5f, 10f, 10f, 10f, 10f };
+    public float[] maxInk = new float[10];
 
     public int[] starCount = new int[10];
 

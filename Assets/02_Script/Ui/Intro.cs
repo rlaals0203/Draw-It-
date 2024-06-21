@@ -67,4 +67,10 @@ public class Intro : MonoBehaviour
 
         StatManager.Instance.isPlayed = true;
     }
+
+    public void OnSkipClick()
+    {
+        StopAllCoroutines();
+        intro.SetActive(false);
+    }
 }

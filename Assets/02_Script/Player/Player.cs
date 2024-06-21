@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     public bool isEnoughInk = true;
     public bool isStart = false;
     public bool isReset = false;
+    public bool isCompleteAnimEnd = true;
 
     private Rigidbody2D rb;
 
@@ -57,12 +58,15 @@ public class Player : MonoBehaviour
 
     public void ResetPlayer()
     {
+        isComplete = false;
         isReset = true;
         isStart = false;
 
         inkLimit = inkLimitOrigin;
+
+        rb.freezeRotation = false;
         rb.simulated = false;
-        rb.velocity = new Vector3(0, 0, 0);
+        rb.velocity = Vector2.zero;
 
         transform.position = GameObject.Find("PlayerPosition").transform.position;
     }
@@ -76,9 +80,11 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "StageEnd")
+        if (collision.tag == "StageEnd" && !isComplete)
         {
             isComplete = true;
+            rb.velocity = Vector2.zero;
+            rb.freezeRotation = true;
             AudioManager.PlaySound(SoundType.COMPLETE);
         }
 

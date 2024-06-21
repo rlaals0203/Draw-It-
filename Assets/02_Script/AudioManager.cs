@@ -17,10 +17,12 @@ public enum SoundType
 public class AudioManager : MonoBehaviour
 {
     public static AudioManager Instance = null;
+    private static float _volume;
 
     [SerializeField] private Slider sliderSFX;
 
     [SerializeField] private AudioClip[] soundList;
+
     private AudioSource audioSource;
 
     private void Awake()
@@ -37,8 +39,13 @@ public class AudioManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    public static void PlaySound(SoundType sound, float volume = 1)
+    public static void PlaySound(SoundType sound)
     {
-        Instance.audioSource.PlayOneShot(Instance.soundList[(int)sound], volume);
+        Instance.audioSource.PlayOneShot(Instance.soundList[(int)sound], _volume);
+    }
+
+    public void VolumeSetting(float value)
+    {
+        _volume = value;
     }
 }

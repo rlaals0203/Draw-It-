@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class Shop : MonoBehaviour
 {
     private bool[] isPurchased = new bool[9];
-    private int[] price = new int[9];
+    [SerializeField] private int[] price = new int[9];
 
     [SerializeField] TMP_Text description;
     [SerializeField] RawImage skinImage;
@@ -33,7 +33,7 @@ public class Shop : MonoBehaviour
 
     private void Start()
     {
-
+        isPurchased[0] = true;
     }
 
     private int star

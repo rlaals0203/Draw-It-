@@ -11,6 +11,7 @@ public class LineGenerator : MonoBehaviour
 
     private int count = 0;
     private float lineLength = 0;
+    private bool deleteCool = false;
 
     private List<float> lineLengthList = new List<float>();
     private Line activeLine;
@@ -96,6 +97,9 @@ public class LineGenerator : MonoBehaviour
 
     public void DeleteLine()
     {
+        if (deleteCool)
+            return;
+
         Destroy(GameObject.Find($"Line{count - 1}"));
         count--;
 
@@ -103,6 +107,9 @@ public class LineGenerator : MonoBehaviour
         {
             Player.Instance.inkLimit += lineLengthList[^1];
             lineLengthList.Remove(lineLengthList[^1]);
+            deleteCool = true;
+
+            StartCoroutine(DeleteLineRoutine());
         }
     }
 
@@ -134,5 +141,11 @@ public class LineGenerator : MonoBehaviour
     {
         yield return new WaitForSeconds(0.05f);
         Player.Instance.isReset = false;
+    }
+
+    IEnumerator DeleteLineRoutine()
+    {
+        yield return new WaitForSeconds(0.25f);
+        deleteCool = false;
     }
 }
