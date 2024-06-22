@@ -7,11 +7,23 @@ using UnityEngine.UI;
 
 public class Intro : MonoBehaviour
 {
+    public static Intro Instance = null;
+
+    private bool isSkip = false;
+
     [SerializeField] private GameObject intro;
     [SerializeField] private RawImage logo;
     [SerializeField] private RawImage background;
     [SerializeField] private TMP_Text korean;
     [SerializeField] private TMP_Text english;
+
+    private void Awake()
+    {
+        if (Instance != null)
+        {
+            Destroy(gameObject);
+        }
+    }
 
     private void Start()
     {
@@ -66,11 +78,23 @@ public class Intro : MonoBehaviour
         intro.SetActive(false);
 
         StatManager.Instance.isPlayed = true;
+
+        if (!isSkip)
+        {
+            Shop.Instance.onSceneChange?.Invoke();
+            isSkip = true;
+        }
     }
 
     public void OnSkipClick()
     {
         StopAllCoroutines();
         intro.SetActive(false);
+
+        if (!isSkip)
+        {
+            Shop.Instance.onSceneChange?.Invoke();
+            isSkip = true;
+        }
     }
 }

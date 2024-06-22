@@ -24,7 +24,7 @@ public class Skin : MonoBehaviour
     {
         foreach (Sprite sprite in spriteList)
         {
-            if (sprite.name == Shop.skinName)
+            if (sprite.name == StageManager.Instance.currentSkin)
             {
                 spriteRenderer.sprite = sprite;
                 break;

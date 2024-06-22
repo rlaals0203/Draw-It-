@@ -12,7 +12,7 @@ public class StageManager : MonoBehaviour
     public GameObject[] maps;
     public GameObject currentMap;
 
-    [SerializeField] private float[] inkLimits = { 12.5f, 7.5f, 6f, 10f, 12.5f, 10f, 10f, 10f, 10f };
+    [SerializeField] private float[] inkLimits;
     public float[] maxInk = new float[10];
 
     public int[] starCount = new int[10];
@@ -20,10 +20,12 @@ public class StageManager : MonoBehaviour
     public bool[] stagePlayed = new bool[10];
     public bool[] stageComplete = new bool[10];
 
-    private int currentLevel = 0;
+    public int currentLevel = 0;
     public int bestLevel = 1;
 
     public bool isStageClicked = false;
+
+    public string currentSkin;
 
     private void Awake()
     {
@@ -33,6 +35,7 @@ public class StageManager : MonoBehaviour
         }
 
         Instance = this;
+        DontDestroyOnLoad(this);
     }
 
     private void Start()
@@ -47,6 +50,8 @@ public class StageManager : MonoBehaviour
 
     private void Update()
     {
+        currentSkin = Shop.skinName;
+
         if (bestLevel < currentLevel)
             bestLevel = currentLevel;
 

@@ -12,19 +12,9 @@ public class Tutorial : MonoBehaviour
 
     private GameObject tutorialParent;
 
-    private int stageNumber
-    {
-        get => StageManager.Instance.FirstPlayed();
-
-        set
-        {
-            stageNum = value;
-        }
-    }
-
     private void Update()
     {
-        if (!StageManager.Instance.stagePlayed[stageNumber] && GameObject.Find("Canvas"))
+        if (!StageManager.Instance.stagePlayed[StageManager.Instance.currentLevel - 1] && GameObject.Find("Canvas"))
         {
             GenerateTutorial();
         }
@@ -40,8 +30,8 @@ public class Tutorial : MonoBehaviour
             return;
         }
 
-        StageManager.Instance.stagePlayed[stageNumber] = true;
-        tutorial = tutorialParent.transform.Find($"Tutorial{stageNumber}").gameObject;
+        StageManager.Instance.stagePlayed[StageManager.Instance.currentLevel - 1] = true;
+        tutorial = tutorialParent.transform.Find($"Tutorial{StageManager.Instance.currentLevel}").gameObject;
 
         if (tutorial != null)
             tutorial.SetActive(true);

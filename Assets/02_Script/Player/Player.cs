@@ -64,9 +64,9 @@ public class Player : MonoBehaviour
 
         inkLimit = inkLimitOrigin;
 
+        rb.velocity = Vector2.zero;
         rb.freezeRotation = false;
         rb.simulated = false;
-        rb.velocity = Vector2.zero;
 
         transform.position = GameObject.Find("PlayerPosition").transform.position;
     }
@@ -78,13 +78,25 @@ public class Player : MonoBehaviour
         inkLimit = Mathf.Clamp(inkLimit, 0, inkLimitOrigin);
     }
 
+    private IEnumerator DecelerationVelocity()
+    {
+        for (int i = 0; i < 10; i++)
+        {
+            rb.velocity /= 1.5f;
+            yield return new WaitForSeconds(0.1f);
+        }
+
+        rb.freezeRotation = true;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.tag == "StageEnd" && !isComplete)
         {
+            StageManager.Instance.stageComplete[StageManager.Instance.currentLevel - 1] = true;
             isComplete = true;
-            rb.velocity = Vector2.zero;
-            rb.freezeRotation = true;
+
+            StartCoroutine(DecelerationVelocity());
             AudioManager.PlaySound(SoundType.COMPLETE);
         }
 
