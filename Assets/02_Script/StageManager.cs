@@ -29,13 +29,18 @@ public class StageManager : MonoBehaviour
 
     private void Awake()
     {
-        if (Instance != null)
+        bestLevel = PlayerPrefs.GetInt("BestLevel");
+
+        DontDestroyOnLoad(this);
+
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
         {
             Destroy(gameObject);
         }
-
-        Instance = this;
-        DontDestroyOnLoad(this);
     }
 
     private void Start()
@@ -53,11 +58,9 @@ public class StageManager : MonoBehaviour
         currentSkin = Shop.skinName;
 
         if (bestLevel < currentLevel)
-            bestLevel = currentLevel;
-
-        if (GameObject.Find(bestLevel.ToString()))
         {
-            Button button = GameObject.Find(bestLevel.ToString()).GetComponent<Button>();
+            bestLevel++;
+            PlayerPrefs.SetInt("BestLevel", bestLevel);
         }
     }
 
@@ -67,6 +70,7 @@ public class StageManager : MonoBehaviour
             SceneManager.LoadScene("Level");
 
         currentMap = Instantiate(currentMap, new Vector3(0, 0, 0), Quaternion.identity);
+
         DontDestroyOnLoad(currentMap);
     }
 
@@ -108,5 +112,16 @@ public class StageManager : MonoBehaviour
     public int FirstPlayed()
     {
         return currentLevel;
+    }
+
+    public void SetStageButton()
+    {
+        bestLevel = PlayerPrefs.GetInt("BestLevel");
+
+        for (int i = 0; i < bestLevel; i++)
+        {
+            Button button = GameObject.Find((i + 1).ToString()).GetComponent<Button>();
+            button.interactable = true;
+        }
     }
 }

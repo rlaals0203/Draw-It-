@@ -55,14 +55,20 @@ public class ClearUI : MonoBehaviour
 
     public void PlayAgain()
     {
-        Player.Instance.isReset = true;
-        StartCoroutine(ClearUIUnactive());
+        if (Player.Instance.isCompleteAnimEnd)
+        {
+            Player.Instance.ResetPlayer();
+            StartCoroutine(ClearUIUnactive());
+        }
     }
 
     public void NextStageClick()
     {
-        isNext = true;
-        StartCoroutine(ClearUIUnactive());
+        if (Player.Instance.isCompleteAnimEnd)
+        {
+            isNext = true;
+            StartCoroutine(ClearUIUnactive());
+        }
     }
 
     private void NextStage()
@@ -74,7 +80,6 @@ public class ClearUI : MonoBehaviour
 
     IEnumerator ClearUIActive()
     {
-        Player.Instance.isCompleteAnimEnd = false;
         background.gameObject.SetActive(true);
 
         yield return new WaitForSeconds(3.5f);
@@ -125,6 +130,8 @@ public class ClearUI : MonoBehaviour
 
         if (Player.Instance.inkLeft > 0.5f)
             StarAniamtion(2);
+
+        Player.Instance.isCompleteAnimEnd = true;
     }
 
     private void StarAniamtion(int n)

@@ -13,6 +13,7 @@ public class MenuButton : MonoBehaviour
     public void OnPlayClick()
     {
         MoveDown();
+        Shop.Instance.onSceneChange?.Invoke();
     }
 
     public void OnTutorialClick()

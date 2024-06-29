@@ -12,6 +12,7 @@ public class Intro : MonoBehaviour
     private bool isSkip = false;
 
     [SerializeField] private GameObject intro;
+    [SerializeField] private GameObject skipButton;
     [SerializeField] private RawImage logo;
     [SerializeField] private RawImage background;
     [SerializeField] private TMP_Text korean;
@@ -65,6 +66,10 @@ public class Intro : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         korean.DOFade(1f, 0.5f);
+
+        yield return new WaitForSeconds(2.5f);
+
+        skipButton.SetActive(false); 
 
         yield return new WaitForSeconds(2.5f);
 

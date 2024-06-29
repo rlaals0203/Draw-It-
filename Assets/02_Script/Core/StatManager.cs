@@ -10,20 +10,22 @@ public class StatManager : MonoBehaviour
     public int diamond = 0;
 
     public bool isPlayed = false;
+    public bool isMutedBGM = false;
 
     private void Awake()
     {
-        if (Instance != null)
+        DontDestroyOnLoad(this);
+
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
         {
             Destroy(gameObject);
         }
 
-        DontDestroyOnLoad(this);
-
-        Instance = this;
         star = PlayerPrefs.GetInt("Star");
-
-        star = 5555;
 }
 
     public int GetStar()

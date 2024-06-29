@@ -22,6 +22,7 @@ public class Buttons : MonoBehaviour
         ball.GetComponent<Rigidbody2D>().simulated = true;
         Player.Instance.isStart = true;
         Portal.count = 1;
+        Player.Instance.trail.time = 1;
     }
 
     public void OnResetClick()

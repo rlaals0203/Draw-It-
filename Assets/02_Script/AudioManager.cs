@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
 
 
 public enum SoundType
@@ -16,22 +17,30 @@ public enum SoundType
 [RequireComponent(typeof(AudioSource))]
 public class AudioManager : MonoBehaviour
 {
+    public Event ToggleBGM;
+
     public static AudioManager Instance = null;
-    private static float _volume;
 
     [SerializeField] private Slider sliderSFX;
 
     [SerializeField] private AudioClip[] soundList;
 
+    [SerializeField] private AudioSource bgm;
+
     private AudioSource audioSource;
 
     private void Awake()
     {
-        if (Instance != null)
+        DontDestroyOnLoad(this);
+
+        if (Instance == null)
+        {
+            Instance = this;
+        }
+        else
         {
             Destroy(gameObject);
         }
-        Instance = this;
     }
 
     private void Start()
@@ -39,13 +48,8 @@ public class AudioManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
     }
 
-    public static void PlaySound(SoundType sound)
+    public static void PlaySound(SoundType sound, float volume = 1)
     {
-        Instance.audioSource.PlayOneShot(Instance.soundList[(int)sound], _volume);
-    }
-
-    public void VolumeSetting(float value)
-    {
-        _volume = value;
+        Instance.audioSource.PlayOneShot(Instance.soundList[(int)sound], volume);
     }
 }

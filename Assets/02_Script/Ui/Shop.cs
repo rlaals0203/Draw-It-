@@ -51,18 +51,13 @@ public class Shop : MonoBehaviour
 
     private void Start()
     {
+        StageManager.Instance.SetStageButton();
         isPurchased[0] = true;
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            for (int i = 1; i < 10; i++)
-            {
-                PlayerPrefs.SetString($"Skin{i}", "0");
-            }
-        }
+
     }
 
     private int star
@@ -165,5 +160,6 @@ public class Shop : MonoBehaviour
         skinImage.texture = skinList[equipSkin - 1];
         GameObject.Find($"Price{equipSkin}").GetComponent<TMP_Text>().text = "¿Â¬¯¡ﬂ";
         skinName = skinList[equipSkin - 1].name;
+        Debug.Log(skinName);
     }
 }

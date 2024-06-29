@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
 {
     public static Player Instance = null;
 
+    public TrailRenderer trail;
+
     public float inkLimitOrigin = 1;
     public float inkLimit = 1;
     public float inkLeft = 0;
@@ -29,6 +31,7 @@ public class Player : MonoBehaviour
         Instance = this;
 
         rb = GetComponent<Rigidbody2D>();
+        trail = GetComponent<TrailRenderer>();
 
         ChangeInkLimit();
     }
@@ -58,17 +61,18 @@ public class Player : MonoBehaviour
 
     public void ResetPlayer()
     {
-        isComplete = false;
+        trail.time = 0;
+        transform.position = GameObject.Find("PlayerPosition").transform.position;
+
         isReset = true;
+        isComplete = false;
         isStart = false;
-
-        inkLimit = inkLimitOrigin;
-
-        rb.velocity = Vector2.zero;
         rb.freezeRotation = false;
         rb.simulated = false;
 
-        transform.position = GameObject.Find("PlayerPosition").transform.position;
+        inkLimit = inkLimitOrigin;
+
+        rb.velocity *= 0;
     }
 
     private void ChangeInkLimit()
@@ -91,9 +95,10 @@ public class Player : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.tag == "StageEnd" && !isComplete)
+        if (collision.tag == "StageEnd" && !isComplete && !isReset)
         {
             StageManager.Instance.stageComplete[StageManager.Instance.currentLevel - 1] = true;
+            isCompleteAnimEnd = false;
             isComplete = true;
 
             StartCoroutine(DecelerationVelocity());

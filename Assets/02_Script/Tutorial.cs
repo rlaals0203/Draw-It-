@@ -20,18 +20,21 @@ public class Tutorial : MonoBehaviour
         }
     }
 
-    private void GenerateTutorial()
+    private void Start()
     {
         FindObject();
+    }
+
+    private void GenerateTutorial()
+    {
+        StageManager.Instance.stagePlayed[StageManager.Instance.currentLevel - 1] = true;
+        tutorial = tutorialParent.transform.Find($"Tutorial{StageManager.Instance.currentLevel}").gameObject;
 
         if (skipButton == null)
         {
             GenerateTutorial();
             return;
         }
-
-        StageManager.Instance.stagePlayed[StageManager.Instance.currentLevel - 1] = true;
-        tutorial = tutorialParent.transform.Find($"Tutorial{StageManager.Instance.currentLevel}").gameObject;
 
         if (tutorial != null)
             tutorial.SetActive(true);

@@ -10,22 +10,19 @@ public class Setting : MonoBehaviour
     static public bool isSettingOpen = false;
 
     [SerializeField] private GameObject settingUI;
+    [SerializeField] private Button muteBGM;
+    [SerializeField] TMP_Text muteBGMText;
 
-    [SerializeField] private TMP_InputField bgm_Input;
-    [SerializeField] private TMP_InputField sfx_Input;
-
-    [SerializeField] private Slider bgm_Slider;
-    [SerializeField] private Slider sfx_Slider;
+    private void Awake()
+    {
+        muteBGM = GetComponent<Button>();
+    }
 
     private void Start()
     {
+        Player.Instance.isReset = false;
         settingUI.SetActive(false);
-    }
-
-    private void Update()
-    {
-        bgm_Input.text = Mathf.RoundToInt(bgm_Slider.value * 100).ToString();
-        sfx_Input.text = Mathf.RoundToInt(sfx_Slider.value * 100).ToString();
+        isSettingOpen = false;
     }
 
     public void OnSettingOpen()
@@ -38,5 +35,19 @@ public class Setting : MonoBehaviour
     {
         Destroy(StageManager.Instance.currentMap);
         SceneManager.LoadScene("Menu");
+    }
+
+    public void OnMuteBGM()
+    {
+        StatManager.Instance.isMutedBGM = !StatManager.Instance.isMutedBGM;
+
+        if (StatManager.Instance.isMutedBGM)
+        {
+            muteBGMText.text = "²ô±â";
+        }
+        else
+        {
+            muteBGMText.text = "ÄÑ±â";
+        }
     }
 }
