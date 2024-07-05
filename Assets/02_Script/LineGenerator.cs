@@ -12,6 +12,7 @@ public class LineGenerator : MonoBehaviour
     private int count = 0;
     private float lineLength = 0;
     private bool deleteCool = false;
+    private bool isAntied = false;
 
     private List<float> lineLengthList = new List<float>();
     private Line activeLine;
@@ -45,14 +46,18 @@ public class LineGenerator : MonoBehaviour
             ResetLine();
         }
     }
-    
+
     private void DrawLine()
     {
-        newLine = Instantiate(linePrefab);
-        newLine.name = $"Line{count}";
-        activeLine = newLine.GetComponent<Line>();
-        count++;
+        if (!AntiDrawArea.isAntiArea)
+        {
+            newLine = Instantiate(linePrefab);
+            newLine.name = $"Line{count}";
+            activeLine = newLine.GetComponent<Line>();
+            count++;
+        }
     }
+
     private void GenerateLine()
     {
         lineLength = 0;
@@ -100,14 +105,16 @@ public class LineGenerator : MonoBehaviour
         if (deleteCool)
             return;
 
-        Destroy(GameObject.Find($"Line{count - 1}"));
-        count--;
-
         if (lineLengthList.Count > 0)
         {
+            Destroy(GameObject.Find($"Line{count - 1}"));
+
             Player.Instance.inkLimit += lineLengthList[^1];
             lineLengthList.Remove(lineLengthList[^1]);
             deleteCool = true;
+
+            if (count > 0)
+                count--;
 
             StartCoroutine(DeleteLineRoutine());
         }
@@ -145,7 +152,7 @@ public class LineGenerator : MonoBehaviour
 
     IEnumerator DeleteLineRoutine()
     {
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.15f);
         deleteCool = false;
     }
 }

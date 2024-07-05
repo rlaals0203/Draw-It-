@@ -145,11 +145,8 @@ public class Shop : MonoBehaviour
         {
             skinPrefs[i - 1] = PlayerPrefs.GetString($"Skin{i}");
 
-            Debug.Log(skinPrefs[i]);
-
             if (skinPrefs[i - 1] == "1")
             {
-                Debug.Log("aaaa");
                 GameObject.Find($"Price{i}").GetComponent<TMP_Text>().text = "소유중";
                 isPurchased[i - 1] = true;
             }
@@ -160,6 +157,5 @@ public class Shop : MonoBehaviour
         skinImage.texture = skinList[equipSkin - 1];
         GameObject.Find($"Price{equipSkin}").GetComponent<TMP_Text>().text = "장착중";
         skinName = skinList[equipSkin - 1].name;
-        Debug.Log(skinName);
     }
 }
