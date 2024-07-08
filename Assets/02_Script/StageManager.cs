@@ -24,6 +24,7 @@ public class StageManager : MonoBehaviour
     public int bestLevel = 1;
 
     public bool isStageClicked = false;
+    public bool isAntiDraw = false;
 
     public string currentSkin;
 
@@ -103,7 +104,6 @@ public class StageManager : MonoBehaviour
     public void NextStage()
     {
         currentLevel++;
-        Debug.Log(currentLevel);
         Destroy(currentMap);
         currentMap = maps[currentLevel - 1];
         GenerateMap();

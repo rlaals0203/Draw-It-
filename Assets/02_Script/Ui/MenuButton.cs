@@ -46,12 +46,12 @@ public class MenuButton : MonoBehaviour
         MoveLeft();
     }
 
-    private void MoveDown()
+    public void MoveDown()
     {
         transform.DOMove(new Vector2(transform.position.x, transform.position.y + 1080), 0.75f).SetEase(Ease.InOutBack);
     }
 
-    private void MoveUp()
+    public void MoveUp()
     {
         transform.DOMove(new Vector2(transform.position.x, transform.position.y - 1080), 0.75f).SetEase(Ease.InOutBack);
     }

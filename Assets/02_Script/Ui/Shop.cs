@@ -36,6 +36,7 @@ public class Shop : MonoBehaviour
         "톱니바퀴",
         "이것은 진품인가 가품인가..",
         "우주 최강의 공 스킨이다. 오직 최강자만이 가질수 있다.",
+        " "
     };
 
     [SerializeField] private string[] skinPrefs = new string[10];

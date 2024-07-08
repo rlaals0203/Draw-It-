@@ -10,6 +10,7 @@ public class LineGenerator : MonoBehaviour
     private GameObject newLine;
 
     private int count = 0;
+
     private float lineLength = 0;
     private bool deleteCool = false;
     private bool isAntied = false;
@@ -36,30 +37,31 @@ public class LineGenerator : MonoBehaviour
             UpdateLine();
         }
 
-        if (Input.GetKeyDown(KeyCode.R) && count > 0 && !Player.Instance.isStart)
-        {
-            DeleteLine();
-        }
-
         if (Player.Instance.isReset)
         {
             ResetLine();
+        }
+
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+            DeleteLine();
         }
     }
 
     private void DrawLine()
     {
-        if (!AntiDrawArea.isAntiArea)
+        if (!StageManager.Instance.isAntiDraw)
         {
+            deleteCool = true;
             newLine = Instantiate(linePrefab);
-            newLine.name = $"Line{count}";
+            newLine.name = $"LineDrawed{count}";
             activeLine = newLine.GetComponent<Line>();
-            count++;
         }
     }
 
     private void GenerateLine()
     {
+        deleteCool = true;
         lineLength = 0;
         activeLine = null;
 
@@ -67,6 +69,7 @@ public class LineGenerator : MonoBehaviour
             return;
 
         LineRenderer line = newLine.GetComponent<LineRenderer>();
+        count++;
 
         if (line.positionCount < 2)
         {
@@ -86,11 +89,12 @@ public class LineGenerator : MonoBehaviour
         }
 
         lineLengthList.Add(lineLength);
+        StartCoroutine(DeleteLineRoutine());
     }
 
     private void UpdateLine()
     {
-        if (!AntiDrawArea.isAntiArea)
+        if (!StageManager.Instance.isAntiDraw)
         {
             Vector2 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             transform.position = new Vector3(mousePos.x, mousePos.y, 0);
@@ -102,29 +106,28 @@ public class LineGenerator : MonoBehaviour
 
     public void DeleteLine()
     {
+        Debug.Log(lineLengthList.Count);
+
         if (deleteCool)
             return;
 
-        if (lineLengthList.Count > 0)
-        {
-            Destroy(GameObject.Find($"Line{count - 1}"));
+        Destroy(GameObject.Find($"LineDrawed{count - 1}"));
 
-            Player.Instance.inkLimit += lineLengthList[^1];
-            lineLengthList.Remove(lineLengthList[^1]);
-            deleteCool = true;
+        Player.Instance.inkLimit += lineLengthList[^1];
+        lineLengthList.Remove(lineLengthList[^1]);
+        deleteCool = true;
 
-            if (count > 0)
-                count--;
+        if (count > 0)
+            count--;
 
-            StartCoroutine(DeleteLineRoutine());
-        }
+        StartCoroutine(DeleteLineRoutine());
     }
 
     private void ResetLine()
     {
         for (int i = 0; i < count; i++)
         {
-            Destroy(GameObject.Find($"Line{i}"));
+            Destroy(GameObject.Find($"LineDrawed{i}"));
         }
 
         count = 0;

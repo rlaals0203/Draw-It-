@@ -21,8 +21,6 @@ public class AudioManager : MonoBehaviour
 
     public static AudioManager Instance = null;
 
-    [SerializeField] private Slider sliderSFX;
-
     [SerializeField] private AudioClip[] soundList;
 
     [SerializeField] private AudioSource bgm;

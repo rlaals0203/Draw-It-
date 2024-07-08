@@ -10,7 +10,7 @@ public class Tutorial : MonoBehaviour
     private GameObject tutorial;
     [SerializeField] private GameObject skipButton;
 
-    private GameObject tutorialParent;
+    [SerializeField] private GameObject tutorialParent;
 
     private void Update()
     {
@@ -28,6 +28,7 @@ public class Tutorial : MonoBehaviour
     private void GenerateTutorial()
     {
         StageManager.Instance.stagePlayed[StageManager.Instance.currentLevel - 1] = true;
+        Debug.Log(StageManager.Instance.currentLevel);
         tutorial = tutorialParent.transform.Find($"Tutorial{StageManager.Instance.currentLevel}").gameObject;
 
         if (skipButton == null)

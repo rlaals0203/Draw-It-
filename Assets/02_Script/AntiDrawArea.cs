@@ -4,33 +4,31 @@ using UnityEngine;
 
 public class AntiDrawArea : MonoBehaviour
 {
-    static public bool isAntiArea = false;
-
     public LayerMask layerMask;
 
     [SerializeField] private float _radius = 0.5f;
 
     private Vector3 _mousePos;
 
-    private Collider2D[] _collectArray;
-
-    private void FixedUpdate()
+    private void Update()
     {
         _mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         _mousePos.z = 0;
 
         Collider2D collider = Physics2D.OverlapCircle(_mousePos, _radius, layerMask);
 
+        Debug.Log(collider || collider == null);
+
         if (collider)
         {
-            if (collider.CompareTag("AntiDrawArea") && collider != null)
+            if (collider.CompareTag("AntiDrawArea"))
             {
-                isAntiArea = true;
+                StageManager.Instance.isAntiDraw = true;
             }
         }
         else
         {
-            isAntiArea = false;
+            StageManager.Instance.isAntiDraw = false;
         }
     }
 }

@@ -202,6 +202,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cf7cf017d90b89a4f842e5681ab6287d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  _radius: 0.5
 --- !u!1 &4865471242538404451
 GameObject:
   m_ObjectHideFlags: 0
@@ -585,11 +589,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6723715368043120410, guid: da367c0df585c68449fad91229adac23, type: 3}
       propertyPath: m_LocalScale.x
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6723715368043120410, guid: da367c0df585c68449fad91229adac23, type: 3}
       propertyPath: m_LocalScale.y
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 6723715368043120410, guid: da367c0df585c68449fad91229adac23, type: 3}
       propertyPath: m_LocalPosition.x
