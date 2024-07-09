@@ -47,7 +47,7 @@ public class Line : MonoBehaviour
         if (points.Count > 1)
         {
             inkDrawed = ((points[^1] - points[^2]).magnitude);
-            Player.Instance.inkLimit -= inkDrawed;
+            Player.inkLimit -= inkDrawed;
         }
     }
 }

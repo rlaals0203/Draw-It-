@@ -9,8 +9,8 @@ public class Player : MonoBehaviour
     public TrailRenderer trail;
 
     public float inkLimitOrigin = 1;
-    public float inkLimit = 1;
-    public float inkLeft = 0;
+    public static float inkLimit = Mathf.Clamp(inkLimit, 0f, 1f);
+    public float inkLeft;
 
     public string skinName = " ";
 

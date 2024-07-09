@@ -13,14 +13,13 @@ public class LineGenerator : MonoBehaviour
 
     private float lineLength = 0;
     private bool deleteCool = false;
-    private bool isAntied = false;
 
     private List<float> lineLengthList = new List<float>();
     private Line activeLine;
 
     private void Update()
     {
-        lineLength = Player.Instance.inkLimit;
+        lineLength = Player.inkLimit;
          
         if (Input.GetMouseButtonDown(0) && !Setting.isSettingOpen && Player.Instance.isEnoughInk && !Player.Instance.isStart)
         {
@@ -42,7 +41,7 @@ public class LineGenerator : MonoBehaviour
             ResetLine();
         }
 
-        if (Input.GetKeyDown(KeyCode.R))
+        if (Input.GetKeyDown(KeyCode.R) && !Player.Instance.isStart)
         {
             DeleteLine();
         }
@@ -108,14 +107,22 @@ public class LineGenerator : MonoBehaviour
     {
         Debug.Log(lineLengthList.Count);
 
-        if (deleteCool)
+        if (deleteCool || Player.Instance.isStart)
+            return;
+
+        if (count < 1)
             return;
 
         Destroy(GameObject.Find($"LineDrawed{count - 1}"));
 
-        Player.Instance.inkLimit += lineLengthList[^1];
+        Player.inkLimit += lineLengthList[^1];
         lineLengthList.Remove(lineLengthList[^1]);
         deleteCool = true;
+
+        if (Player.inkLimit > 10)
+        {
+            Player.inkLimit = 10;
+        }
 
         if (count > 0)
             count--;
